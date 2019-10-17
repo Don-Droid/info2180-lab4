@@ -6,13 +6,15 @@ function applyAttributes(){
 		boxes[i].setAttribute("class", "square");
 		boxes[i].setAttribute("id", i+1);
         boxes[i].setAttribute("type", "button");  
-        boxes[i].addEventListener('click', boxfunc, false);    
+        boxes[i].addEventListener('click', click, false); 
+        boxes[i].addEventListener('mouseover', mHover, false)  
+        boxes[i].addEventListener('mouseleave', mLeave, false)
     }    
 }
 
 window.onload = applyAttributes;
 
-function boxfunc(e){      
+function click(e){      
     if(e.target === e.currentTarget){
        let clickedItem = e.target.id;
        if (clickCounter % 2 === 0){
@@ -25,4 +27,18 @@ function boxfunc(e){
             clickCounter +=1 ;
        }         
     }       
+}
+
+function mHover(e){
+    if(e.target === e.currentTarget){
+        let mouseOverItem = e.target.id;
+        document.getElementById(mouseOverItem).classList.add("hover");
+    }    
+}
+
+function mLeave (e){
+    if(e.target === e.currentTarget){
+        let leftItem = e.target.id;
+        document.getElementById(leftItem).classList.remove("hover");
+    }
 }
