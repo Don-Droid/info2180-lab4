@@ -2,21 +2,21 @@ let clickCounter = 1; //Variable to keep track of the amount clicks made.
 
 //This function apply the necessary attributes to display the squares.
 function applyAttributes(){
-    
     let boxes = document.getElementById("board").children;    
 	for(let i = 0; i < boxes.length; i++){
 		boxes[i].setAttribute("class", "square");
         boxes[i].setAttribute("id", i+1); 
         boxes[i].innerText = '';
         boxes[i].addEventListener('click', boxClick, false); 
-        boxes[i].addEventListener('mouseover', mHover, false)  
-        boxes[i].addEventListener('mouseleave', mLeave, false)
-        
+        boxes[i].addEventListener('mouseover', mHover, false); 
+        boxes[i].addEventListener('mouseleave', mLeave, false);    
     }
     document.getElementsByTagName("button")[0].addEventListener('click', buttonClick, false);
     document.getElementById("status").classList.remove("you-won");
     document.getElementById("status").innerText = "Move your mouse over a square and click to play an X or an O.";
 }
+
+//This function reset the game when the "New Game" button is clicked.
 function buttonClick(){
     applyAttributes();
 }
