@@ -1,4 +1,4 @@
-let clickCounter = 1; //Variable to keep track of the amount clicks made.
+let clickCounter = Math.ceil(Math.random() * 2); //Variable to keep track of the amount clicks made, starts with random number to decide who play first.
 
 //This function apply the necessary attributes to display the squares.
 function applyAttributes(){
@@ -24,17 +24,17 @@ function buttonClick(){
 //apply attributes when windows load.
 window.onload = applyAttributes;
 
-//This function add specific classes to clicked items, keep track of the played letter, and check if there is a winner.  
+//This function add specific classes to clicked items, keep track of the played letter, disallow cheating and check if there is a winner.  
 function boxClick(e){      
     if(e.target === e.currentTarget){
        let clickedItem = e.target.id;
-       if (clickCounter % 2 === 0){
+       if (clickCounter % 2 === 1 && document.getElementById(clickedItem).innerText === ''){
             document.getElementById(clickedItem).innerText = "O";
             document.getElementById(clickedItem).className = "square O";
             let played = "O";
             clickCounter += 1;
             checkForWinner(played);
-       }else{
+       }else if (clickCounter % 2 === 0 && document.getElementById(clickedItem).innerText === ''){
             document.getElementById(clickedItem).innerText = "X";
             document.getElementById(clickedItem).className = "square X";
             let played = "X";
