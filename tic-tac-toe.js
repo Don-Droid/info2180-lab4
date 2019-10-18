@@ -1,46 +1,51 @@
-let clickCounter = 1;
-let turn = '';
+let clickCounter = 1; //Variable to keep track of the amount clicks made.
 
+//This function apply the necessary attributes to display the squares.
 function applyAttributes(){
+    
     let boxes = document.getElementById("board").children;    
 	for(let i = 0; i < boxes.length; i++){
 		boxes[i].setAttribute("class", "square");
-		boxes[i].setAttribute("id", i+1);
-        boxes[i].setAttribute("type", "button");  
-        boxes[i].addEventListener('click', click, false); 
+        boxes[i].setAttribute("id", i+1); 
+        boxes[i].innerText = '';
+        boxes[i].addEventListener('click', boxClick, false); 
         boxes[i].addEventListener('mouseover', mHover, false)  
         boxes[i].addEventListener('mouseleave', mLeave, false)
-    }    
+        
+    }
+    document.getElementsByTagName("button")[0].addEventListener('click', buttonClick, false);
+    document.getElementById("status").classList.remove("you-won");
+    document.getElementById("status").innerText = "Move your mouse over a square and click to play an X or an O.";
+}
+function buttonClick(){
+    applyAttributes();
 }
 
+//apply attributes when windows load.
 window.onload = applyAttributes;
 
-function click(e){      
+//This function add specific classes to clicked items, keep track of the played letter, and check if there is a winner.  
+function boxClick(e){      
     if(e.target === e.currentTarget){
        let clickedItem = e.target.id;
        if (clickCounter % 2 === 0){
             document.getElementById(clickedItem).innerText = "O";
             document.getElementById(clickedItem).className = "square O";
-            //checkForWinner();
-            turn = "X";
             let played = "O";
             clickCounter += 1;
             checkForWinner(played);
-			//alert (turn);
        }else{
             document.getElementById(clickedItem).innerText = "X";
             document.getElementById(clickedItem).className = "square X";
-           // checkForWinner();
-            turn = "O";
             let played = "X";
             clickCounter +=1 ;
             checkForWinner(played);
-			//alert (turn);
        } 
     }
            
 }
 
+//This function add the hover class on mouse over squares.
 function mHover(e){
     if(e.target === e.currentTarget){
         let mouseOverItem = e.target.id;
@@ -48,6 +53,7 @@ function mHover(e){
     }    
 }
 
+//This function add the hover class on mouse over squares.
 function mLeave (e){
     if(e.target === e.currentTarget){
         let leftItem = e.target.id;
@@ -55,8 +61,8 @@ function mLeave (e){
     }
 }
 
+//This function takes in a played letter and check if there a row, column or diagonal line contains the played letter  
 function checkForWinner(letter){
-    let result = false;
     if (check(1, 2, 3, letter)||
         check(4, 5, 6, letter)||
         check(7, 8, 9, letter)||
@@ -65,15 +71,13 @@ function checkForWinner(letter){
         check(1, 4, 7, letter)||
         check(2, 5, 8, letter)||
         check(3, 6, 9, letter)){
-            result = true;
         }
 }
 
 function check(a, b, c, letter){
     let result = false;
     if(getBox (a) == letter && getBox (b) == letter && getBox (c) == letter){
-        result = true;
-        document.getElementById("status").innerText = "Congratulations! " + letter + " is the Winner!";
+        document.getElementById("status").innerText = "Congratulations " + letter + " is the Winner!";
         document.getElementById("status").classList.add("you-won");
     }
 }
