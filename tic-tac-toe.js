@@ -77,7 +77,7 @@ function checkForWinner(letter){
 function check(a, b, c, letter){
     let result = false;
     if(getBox (a) == letter && getBox (b) == letter && getBox (c) == letter){
-        document.getElementById("status").innerText = "Congratulations " + letter + " is the Winner!";
+        document.getElementById("status").innerText = "Congratulations " + letter + " is the Winner, Shauna remember Raldon loves you!";
         document.getElementById("status").classList.add("you-won");
     }
 }
